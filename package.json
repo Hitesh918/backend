@@ -1,0 +1,19 @@
+{
+  "name": "schemaverse",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^6.2.0",
+    "mongodb-runner": "^5.4.5",
+    "mongoose": "^8.0.0",
+    "sqlite3": "^5.1.6"
+  }
+}
