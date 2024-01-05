@@ -6,8 +6,9 @@ const { Statement } = require('sqlite3');
 const uri = "mongodb+srv://hrenukunta66:hitesh66@cluster0.pfx1ved.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, {});
 
-let input=`db.licenses.find({id:101586})`
-let collections=["crime_scene_reports" , "persons"  , "incomes" , "interviews" , "licenses" , "get_fit_now_check_ins" , "get_fit_now_members" , "facebook_event_checkins"]
+let input=`db.facebook_evnt_checkins.aggregate([{"$project" : {"arrsize" : {"$size" : "$activity"} , "person_id":1}} , {"$sort" : {"arrsize" : -1}}])`
+// let input=`db.licenses.find({id:101586})`
+let collections=["crime_scene_reports" , "persons"  , "incomes" , "interviews" , "licenses" , "get_fit_now_check_ins" , "get_fit_now_members" , "facebook_evnt_checkins"]
 
 let first , second , third , query
 
@@ -62,6 +63,8 @@ async function run() {
         console.log('Documents in the collection:', documents);
     }
     else if(third=="aggregate"){
+      console.log("yo")
+        // documents = await collection.aggregate([{"$project" : {"arrsize" : {"$size" : "$activity"} , "person_id":1}}]).toArray();
         documents = await collection.aggregate(JSON.parse(query)).toArray();
         console.log('Documents in the collection:', documents);
     }
@@ -74,7 +77,7 @@ async function run() {
   }
 }
 
-// run().catch(console.dir);
+run().catch(console.dir);
 
 
 app.get('/run', async (req, res) => {
